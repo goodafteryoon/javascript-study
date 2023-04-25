@@ -9,8 +9,17 @@
 </head>
 
 <body>
+  <div class="hello">
+    <h1>Title 1</h1>
+    <p>Paragraph 1</p>
+  </div>
+  <div class="hello">
+    <h1>Title 2</h1>
+    <p>Paragraph 2</p>
+  </div>
   <script>
-    console.log("Hello World!");
+    const title = document.querySelector(".hello:first-child h1");
+    console.log(title);
   </script>
 </body>
 
