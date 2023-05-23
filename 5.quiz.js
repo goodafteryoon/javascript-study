@@ -2,17 +2,17 @@
 // 단, 주어진 배열을 수정하지 않도록!
 // input : ['🍌', '🍓', '🍇', '🍓']
 // output: ['🍌', '🥝', '🍇', '🥝']
-function replace(arr) {
+function replace(arr, from, to) {
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === '🍓') {
-      arr[i] = '🥝';
+    if (arr[i] === from) {
+      arr[i] = to;
     }
   }
   return arr;
 }
 
 const arr1 = ['🍌', '🍓', '🍇', '🍓'];
-const arr2 = replace(arr1);
+const arr2 = replace(arr1, '🍓', '🥝');
 console.log(arr2);
 
 // 퀴즈 2:
