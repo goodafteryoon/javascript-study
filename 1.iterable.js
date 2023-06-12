@@ -15,3 +15,19 @@ const obj = { 0: 1, 1: 2 };
 for (const item in obj) {
   console.log(item);
 }
+
+const iterator = array.values();
+// for (const item of iterator) {
+//   console.log(item);
+// }
+// console.log(iterator.next()); // 1
+// console.log(iterator.next()); // 2
+// console.log(iterator.next()); // 3
+// console.log(iterator.next().done); // 반복 끝남(done : true)을 알려줌
+
+// for of의 내부적 코드는 이러할 것
+while (true) {
+  const item = iterator.next();
+  if (item.done) break;
+  console.log('item.value :', item.value);
+}
