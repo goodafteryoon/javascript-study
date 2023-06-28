@@ -40,3 +40,18 @@ console.log(name);
 console.log(age);
 console.log(occupation);
 console.log(pet);
+
+// Quiz
+const prop = {
+  name: 'Button',
+  styles: {
+    size: 20,
+    color: 'black',
+  },
+};
+
+// 단, styles는 변수로 할당된게 아니고 중첩된 구조분해할당을 위해 사용된 것이기 때문에 styles는 사용할 수 없음
+function changeColor({ styles: { color } }) {
+  console.log(color);
+}
+changeColor(prop);
