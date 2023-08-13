@@ -27,9 +27,18 @@ Tiger.prototype = Object.create(Animal.prototype);
 Tiger.prototype.hunt = () => {
   console.log('사냥하자! ..🐇..');
 };
+
 const dog1 = new Dog('멍멍', '🐶', '앨리');
 dog1.play();
 dog1.printName();
 const tiger1 = new Tiger('어흥', '🐯');
 tiger1.printName();
 tiger1.hunt();
+
+// instanceof : 객체가 어떤 클래스, 생성자 함수를 사용하는지 어떤 프로토타입을 상속하는지를 확인할 수 있다.
+console.log(dog1 instanceof Dog);
+console.log(dog1 instanceof Animal);
+console.log(dog1 instanceof Tiger);
+console.log(tiger1 instanceof Tiger);
+console.log(tiger1 instanceof Tiger);
+console.log(tiger1 instanceof Tiger);
