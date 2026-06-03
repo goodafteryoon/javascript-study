@@ -15,3 +15,21 @@
   const r = add10(a);
   log(r);
 </script>
+
+# 일급 함수
+- 함수를 값으로 다룰 수 있다
+- 함수가 일급이란 것은, 함수의 결과값으로 함수가 사용될 수 있다는 것
+- 조합성과 추상화의 도구
+
+<script>
+  const add5 = a => a + 5;
+  log(add5); // a => a + 5
+  log(add5(5)); // 10
+
+  const f1 = () => () => 1;
+  log(f1()); // () => 1
+
+  const f2 = f1();
+  log(f2); // ()=>1
+  log(f2()); // 1
+</script>
