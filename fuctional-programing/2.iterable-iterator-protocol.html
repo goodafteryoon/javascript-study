@@ -1,0 +1,42 @@
+### Array
+<script>
+  const arr = [1, 2, 3];
+  // arr[Symbol.iterator] = null; // 이렇게 하면 순회 불가능
+  // for of 문에는 Symbol.iterator의 함수가 없으면 순회 불가능
+  for (const a of arr) {
+    log(a);
+  }
+  // 1, 2, 3
+</script>
+
+### Set
+<script>
+  const set = new Set([1, 2, 3]);
+  for (const a of set) {
+    log(a);
+  }
+  // 1, 2, 3
+</script>
+
+### Map
+<script>
+  const map = new Map([['a', 1], ['b', 2], ['c', 3]]);
+  for (const a of map) {
+    log(a);
+  }
+  // ['a', 1], ['b', 2], ['c', 3]
+</script>
+
+
+### 이터러블
+- 이터러블: 이터레이터를 리턴하는 [Symbol.iterater]() 함수를 가진 값
+// 아까처럼 Symbol.iterator를 지우면 arr is not iterable 에러가 발생한다
+// array가 이터러블인 이유는 Symbol.iterator를 가지고 있기 때문이다.
+// let iterator = arr[Symbol.iterator] => function values() { [native code] }
+
+### 이터레이터
+- 이터레이터: { value, done } 객체를 리턴하는 next() 메소드를 가진 값
+// iterator.next() => {valuse:1, done:false}
+
+### 이터러블/이터레이터 프로토콜
+- 이터러블/이터레이터 프로토콜: 이터러블 for...of, 전개 연산자 등과 함께 동작하도록 규약
