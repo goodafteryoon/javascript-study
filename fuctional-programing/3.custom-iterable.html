@@ -1,0 +1,47 @@
+<!-- 내장 이터러블이라고 할 수 있는 Array, Set, Map 이 이터러블 이터레이터 프로코톨을 따르고 있는데, 우리가 직접 이터러블을 만들어 볼 수 있다
+이터러블이라는 값은 [Symbol.iterator]() 라는 메서드를 가지고 있어야 한다
+그리고 Symbol.iterator 메서드는 이터레이터를 반환해야 한다
+이때 iterator는 next를 메서드로 가지고 있으며 next 메소드는 value와 done을 반환해야 한다 -->
+<script>
+  const iterable = {
+    [Symbol.iterator]() {
+      let i = 3;
+      return (
+        {
+          next() {
+            return i === 0 ? { done: true } : { value: i--, done: false };
+          },
+        }
+      );
+    },
+  };
+  let iterator = iterable[Symbol.iterator]()
+  console.log(iterator.next()) // 3, false
+  console.log(iterator.next()) // 2, false
+  console.log(iterator.next()) // 1, false
+  console.log(iterator.next()) // undefined, true
+
+  const arr2 = [1, 2, 3]
+  //  array 의 경우, 즉 잘 구현된 이터러블의 경우에는
+  let iter2 = arr2[Symbol.iterator](); // 이터레이터를 만들어서 이 이터레이터를 집어 넣었을 때 순회가 된다
+  iter2.next() //  진행하다가 순회할 수도 있고 이 이터레이터를 그대로 for 구문에 넣었을 때 그대로 모든 값들을 순회할 수 있도록 되어있다.
+  log(iter2[Symbol.iterator]() == iter2); // 그리고 이 Symbol.iterator를 실행한 값은 자기 자신임
+  // 이렇게 이터레이터가 자기 자신을 반환하는 [Symbol.iterator] 메소드를 가지고 있을 때 Well-formed iterator 라고 할 수 있음
+  for (const a of arr2) {
+    console.log(a)
+  }
+
+  // 이 iterable iterator 프토로콜은 ES6에서 지원하는 내장 값만 이 프로토콜을 지원하는 게 아니다 
+  // 이미 많은 오픈 소스 라이브러리나 어떤 자바스크립트에서 순회가 가능한 값을 가진 값들은 대부분 이 이터레이터, 이터러블 프토토콜을 따르기 시작했다
+  // 예를 들어 페이스북에서 만든 immutable.js 같은 경우에도 이렇게 for - of 문을 통해서 순회할 수 있도록 심볼 이터레이터가 구현되어있다
+  // 오픈소스만 구현되어있는게 아니라 JS가 사용되고 있는 환경인 브라우저에서 사용할 수 있는 웹 APIs 들에 있는 많은 값들 ex.document.querySelectorAll 등
+  // 이터레이터 프로토콜을 따르고 있다.
+
+
+  for (const element of document.querySelectorAll('*')) log(element)  // 이런식으로 순회할 수 있는 이유는
+  const all = document.querySelectorAll('*'); // all 이 배열이라서 그런 게 아니라 심볼 이터레이터가 구현되어있기 때문
+  let iter3 = all[Symbol.iterator]();
+  log(iter3.next());
+  log(iter3.next());
+  log(iter3.next());
+</script>
