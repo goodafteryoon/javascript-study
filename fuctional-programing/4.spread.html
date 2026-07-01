@@ -1,0 +1,28 @@
+<script>
+  // Symbol.iterator 는 배열 인스턴스 a 안에 직접 들어있는 게 아니라, 배열의 부모 격인(배열의 프로토타입 체인 객체) Array.prototype에 들어있음
+  const a = [1, 2];
+  a.__proto_ === Array.prototype;
+  // 실제 이터레이터 메서드 위치
+  Array.prototype[Symbol.iterator]
+  // 배열a 가 ...a, for ... of 같은 걸 만났을 때 JS는 이렇게 찾는다
+  a[Symbol.iterator]
+  // 그런데 a 자기 자신에게 없으면 Array.prototype 에서 찾음 
+
+  console.log(a.hasOwnProperty(Symbol.iterator)); // false => false인 이유는 a 안에 직접 있는게 아니라 프로토타입에서 물려 받은 것이기 때문
+  console.log(Array.prototype.hasOwnPropery(Symbol.iterator)); // true
+  console.log(a[Symbol.iterator]); // function values() { [native code] }
+
+  // 배열에 보이지 않는 이유 1) Symbol.iterator는 문자열 키가 아니라 Symbol 키다
+  const ab = [1, 2];
+  Object.keys(ab); // ['0', '1']
+  // Object.keys는 열거 가능한 문자열 키만 보여줌
+  // 그래서 Symbol.iterator 같은 심볼 키는 안 나옴
+  // 배열에 보이지 않는 이유 2) Symbol.iterator는 a 자기 자신이 아니라 Array.prototype 쪽에 있음
+  Object.getOwnPropertyNames(ab); // []
+
+  // 이렇게 배열의 프로토타입 체인에서 Symbol.iterator를 null로 바꿔버리면 배열은 이터러블이 아니게 된다
+  const c = [1, 2];
+  c[Symbol.iterator] = null;
+  log(...c, ...[3, 4]); // Uncaught TypeError: c is not iterable
+  // 전개 연산자 역시 이터러블 프로토콜을 따르고 있는 값들을 펼칠 수 있는 연산자다
+</script>
