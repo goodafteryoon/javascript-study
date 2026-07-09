@@ -1,0 +1,29 @@
+<script>
+
+  function* infinity(i = 0) {
+    while (true) yield i++;
+  }
+
+  function* limit(i = 0) {
+    for (const a of iter) {
+      yield a;
+      if (a == l) return;
+    }
+  }
+  function* odds() {
+    for (const a of infinity(1)) {
+      if (a % 2) yield a;
+      if (a == l) return;
+    }
+
+  }
+  let iter2 = odds(10);
+  log(iter2.next()) // {value:1, done: false}
+  log(iter2.next()) // {value:3, done: false}
+  log(iter2.next()) // {value:5, done: false}
+  log(iter2.next()) // {value:7, done: false}
+  log(iter2.next()) // {value:9, done: false}
+  log(iter2.next()) // {value:undefined, done: true}
+  log(iter2.next()) // {value:undefined, done: true}
+
+</script>
