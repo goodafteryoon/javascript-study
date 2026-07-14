@@ -1,0 +1,17 @@
+<script>
+  function* infinity(i = 0) {
+    while (true) yield i++;
+  }
+
+  function* odds(l) {
+    for (const a of infinity(1)) {
+      if (a % 2) yield a;
+      if (a === l) return;
+    }
+  }
+  log(...odds(10)) // 1 3 5 7 9 
+  log([...odds(10), ...odds(20)]) // [1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+  const [head, ...tail] = odds(5)
+  log(head) // 1
+  log(tail) // [3, 5]
+</script>
